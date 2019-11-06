@@ -20,7 +20,7 @@ namespace ConsoleApplication1
 
             if (!Int32.TryParse(s, out sayi) || sayi < 0 || sayi > Int32.MaxValue -1)
             {
-                Console.WriteLine("Girilen değer tam sayı değil veya sayı izin verilen aralık 0 - {0} dışında girildi.", Int32.MaxValue);
+                Console.WriteLine("Girilen değer tam sayı değil veya sayı izin verilen aralık (0 - {0}) dışında girildi.", Int32.MaxValue);
                 goto sayiGirisi;
             }
 
