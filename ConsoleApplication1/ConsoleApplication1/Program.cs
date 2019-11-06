@@ -18,9 +18,9 @@ namespace ConsoleApplication1
 
             // string sayi dönüşüm işlemleri için https://youtu.be/IjuDU5AMTOI linkinden ilgili videomu izleyebilirsiniz. 
 
-            if (!Int32.TryParse(s, out sayi) || sayi < 0)
+            if (!Int32.TryParse(s, out sayi) || sayi < 0 || sayi > Int32.MaxValue -1)
             {
-                Console.WriteLine("Girilen değer tam sayı değil veya 0'dan küçük değer girildi");
+                Console.WriteLine("Girilen değer tam sayı değil veya sayı izin verilen aralık 0 - {0} dışında girildi.", Int32.MaxValue);
                 goto sayiGirisi;
             }
 
@@ -33,11 +33,52 @@ namespace ConsoleApplication1
             }
 
             basamakSayisi++;
-            Console.WriteLine("Basamak sayısı: {0}", basamakSayisi);
+            Console.WriteLine("Girilen Sayının Basamak sayısı: {0}", basamakSayisi);
+            Console.WriteLine("Sayının Basamakları:");
+            string basamakAd;
+
             for (int i = basamakSayisi-1; i >= 0; i--)
             {
                 int pow = (int) Math.Pow(10, i);
-                Console.WriteLine(sayi / pow);
+
+                switch (i)
+                {
+                    case 9:
+                        basamakAd = "Milyarlık";
+                        break;
+                    case 8:
+                        basamakAd = "Yüz Milyonluk";
+                        break;
+                    case 7:
+                        basamakAd = "On Milyonluk";
+                        break;
+                    case 6:
+                        basamakAd = "Milyonluk";
+                        break;
+                    case 5:
+                        basamakAd = "Yüz Binlik";
+                        break;
+                    case 4:
+                        basamakAd = "On Binlik";
+                        break;
+                    case 3:
+                        basamakAd = "Binlik";
+                        break;
+                    case 2:
+                        basamakAd = "Yüzlük";
+                        break;
+                    case 1:
+                        basamakAd = "Onluk";
+                        break;
+                    case 0:
+                        basamakAd = "Birlik";
+                        break;
+                    default:
+                        basamakAd = String.Empty;
+                        break;
+                }
+
+                Console.WriteLine("{0} tane {1}", sayi / pow, basamakAd);
                 sayi = sayi % pow;
             }
 
